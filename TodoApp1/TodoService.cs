@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoApp1.DTO;
 
 namespace TodoApp1
 {
@@ -12,52 +13,68 @@ namespace TodoApp1
     {
         bool Create(Todo item);
         Todo Get(Guid guid);
+        ResponseBase Delete(Guid guid);
     }
     public sealed class TodoService : ITodoService
     {
         public bool Create(Todo item)
         {
-            
             if (item.Name.Length >= 50)
+                return false;
+                
+            try
+            {
+                var path = Helper.GetTodoPath(item.Id);
+                var isExist = File.Exists(path);
+                if (isExist != true)
+                {
+                    File.Create(path).Dispose();
+                }
+
+                using (var streamWriter = new StreamWriter(path))
+                {
+                    var json = JsonConvert.SerializeObject(item, Formatting.Indented);
+
+                    streamWriter.WriteLine(json);
+                    streamWriter.Close();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
             {
                 return false;
             }
             
-            
-            try
-                {
-                    var path = Helper.GetTodoPath(item.Id);
-                    var isExist = File.Exists(path);
-                    if (isExist != true)
-                    {
-                        File.Create(path).Dispose();
-                    }
-
-                    using (var streamWriter = new StreamWriter(path))
-                    {
-                        var json = JsonConvert.SerializeObject(item, Formatting.Indented);
-
-                        streamWriter.WriteLine(json);
-                        streamWriter.Close();
-                    }
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            
         }
-            public Todo Get(Guid guid)
+
+        public ResponseBase Delete(Guid guid)
+        {
+            var response = new ResponseBase();
+
+            try
             {
-                var path = Helper.GetTodoPath(guid);
-                var json = File.ReadAllText(path);
-
-                var todo = JsonConvert.DeserializeObject<Todo>(json);
-                return todo;
-
+                File.Delete(Helper.GetTodoPath(guid));
+                response.Status = Status.Success;
             }
+            catch(Exception ex) 
+            {
+                response.Exception = ex;
+                response.Status = Status.Error;
+            }
+
+            return response;
+        }
+
+        public Todo Get(Guid guid)
+        {
+            var path = Helper.GetTodoPath(guid);
+            var json = File.ReadAllText(path);
+
+            var todo = JsonConvert.DeserializeObject<Todo>(json);
+            return todo;
+
         }
     }
+}
 

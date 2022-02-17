@@ -76,7 +76,7 @@ namespace TodoApp1
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(59, 270);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 35);
@@ -96,7 +96,7 @@ namespace TodoApp1
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.Location = new System.Drawing.Point(300, 270);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 35);
@@ -107,7 +107,7 @@ namespace TodoApp1
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button3.Location = new System.Drawing.Point(410, 270);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(118, 35);
@@ -132,7 +132,6 @@ namespace TodoApp1
             this.listView1.Size = new System.Drawing.Size(128, 199);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            
             // 
             // Form1
             // 
@@ -151,6 +150,7 @@ namespace TodoApp1
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
