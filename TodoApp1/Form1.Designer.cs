@@ -33,12 +33,11 @@ namespace TodoApp1
             this.label2 = new System.Windows.Forms.Label();
             this.todoNameTextBox = new System.Windows.Forms.TextBox();
             this.todoBodyTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.createButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.showButton = new System.Windows.Forms.Button();
+            this.showtextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -74,16 +73,16 @@ namespace TodoApp1
             this.todoBodyTextBox.Size = new System.Drawing.Size(264, 133);
             this.todoBodyTextBox.TabIndex = 3;
             // 
-            // button1
+            // createButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(59, 270);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 35);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Создать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.createButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.createButton.Location = new System.Drawing.Point(59, 270);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(147, 35);
+            this.createButton.TabIndex = 4;
+            this.createButton.Text = "Создать";
+            this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // listBox1
             // 
@@ -94,56 +93,46 @@ namespace TodoApp1
             this.listBox1.Size = new System.Drawing.Size(228, 199);
             this.listBox1.TabIndex = 5;
             // 
-            // button2
+            // deleteButton
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(300, 270);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 35);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Удалить";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.deleteButton.Location = new System.Drawing.Point(300, 270);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(104, 35);
+            this.deleteButton.TabIndex = 6;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // button3
+            // showButton
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(410, 270);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 35);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Показать";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.showButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.showButton.Location = new System.Drawing.Point(410, 270);
+            this.showButton.Name = "showButton";
+            this.showButton.Size = new System.Drawing.Size(118, 35);
+            this.showButton.TabIndex = 7;
+            this.showButton.Text = "Показать";
+            this.showButton.UseVisualStyleBackColor = true;
+            this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
-            // textBox1
+            // showtextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(752, 58);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(114, 247);
-            this.textBox1.TabIndex = 8;
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(546, 58);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(128, 199);
-            this.listView1.TabIndex = 9;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.showtextBox.Location = new System.Drawing.Point(550, 58);
+            this.showtextBox.Multiline = true;
+            this.showtextBox.Name = "showtextBox";
+            this.showtextBox.Size = new System.Drawing.Size(316, 247);
+            this.showtextBox.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 363);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.showtextBox);
+            this.Controls.Add(this.showButton);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.createButton);
             this.Controls.Add(this.todoBodyTextBox);
             this.Controls.Add(this.todoNameTextBox);
             this.Controls.Add(this.label2);
@@ -162,12 +151,11 @@ namespace TodoApp1
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox todoNameTextBox;
         private System.Windows.Forms.TextBox todoBodyTextBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button showButton;
+        private System.Windows.Forms.TextBox showtextBox;
     }
 }
 

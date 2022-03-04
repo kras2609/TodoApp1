@@ -14,6 +14,7 @@ namespace TodoApp1
         bool Create(Todo item);
         Todo Get(Guid guid);
         ResponseBase Delete(Guid guid);
+        List<Todo> GetAll();
     }
     public sealed class TodoService : ITodoService
     {
@@ -21,7 +22,7 @@ namespace TodoApp1
         {
             if (item.Name.Length >= 50)
                 return false;
-                
+
             try
             {
                 var path = Helper.GetTodoPath(item.Id);
@@ -45,7 +46,7 @@ namespace TodoApp1
             {
                 return false;
             }
-            
+
         }
 
         public ResponseBase Delete(Guid guid)
@@ -57,7 +58,7 @@ namespace TodoApp1
                 File.Delete(Helper.GetTodoPath(guid));
                 response.Status = Status.Success;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 response.Exception = ex;
                 response.Status = Status.Error;
@@ -74,6 +75,20 @@ namespace TodoApp1
             var todo = JsonConvert.DeserializeObject<Todo>(json);
             return todo;
 
+        }
+
+        public List<Todo> GetAll()
+        {
+            var todos = new List<Todo>();
+            var txtFiles = Directory.GetFiles(@"E:\Todos", "*.txt").ToList();
+            foreach (var currentFile in txtFiles)
+            {
+                var json = File.ReadAllText(currentFile);
+                var todo = JsonConvert.DeserializeObject<Todo>(json);
+                todos.Add(todo);
+            }
+            return todos;
+            
         }
     }
 }
