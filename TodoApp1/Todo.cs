@@ -8,7 +8,7 @@ namespace TodoApp1
 {
     public sealed class Todo
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Body { get; set; }
         public DateTime Created { get; set; }
@@ -21,8 +21,7 @@ namespace TodoApp1
 
         public Todo()
         {
-            Id = Guid.NewGuid();
-            Created = DateTime.Now;
+            
         }
 
        

@@ -12,5 +12,10 @@ namespace TodoApp1
         {
             return $"E:\\Todos\\{id}.txt";
         }
+
+        public static string GetTodoFolderPath()
+        {
+            return @"E:\Todos";
+        }
     }
 }

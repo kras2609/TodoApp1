@@ -80,7 +80,7 @@ namespace TodoApp1
         public List<Todo> GetAll()
         {
             var todos = new List<Todo>();
-            var txtFiles = Directory.GetFiles(@"E:\Todos", "*.txt").ToList();
+            var txtFiles = Directory.GetFiles(Helper.GetTodoFolderPath(), "*.txt").ToList();
             foreach (var currentFile in txtFiles)
             {
                 var json = File.ReadAllText(currentFile);

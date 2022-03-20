@@ -38,6 +38,7 @@ namespace TodoApp1
             this.deleteButton = new System.Windows.Forms.Button();
             this.showButton = new System.Windows.Forms.Button();
             this.showtextBox = new System.Windows.Forms.TextBox();
+            this.redactButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -123,11 +124,23 @@ namespace TodoApp1
             this.showtextBox.Size = new System.Drawing.Size(316, 247);
             this.showtextBox.TabIndex = 8;
             // 
+            // redactButton
+            // 
+            this.redactButton.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.redactButton.Location = new System.Drawing.Point(340, 311);
+            this.redactButton.Name = "redactButton";
+            this.redactButton.Size = new System.Drawing.Size(145, 36);
+            this.redactButton.TabIndex = 9;
+            this.redactButton.Text = "Редактировать";
+            this.redactButton.UseVisualStyleBackColor = true;
+            this.redactButton.Click += new System.EventHandler(this.redactButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 363);
+            this.Controls.Add(this.redactButton);
             this.Controls.Add(this.showtextBox);
             this.Controls.Add(this.showButton);
             this.Controls.Add(this.deleteButton);
@@ -156,6 +169,7 @@ namespace TodoApp1
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button showButton;
         private System.Windows.Forms.TextBox showtextBox;
+        private System.Windows.Forms.Button redactButton;
     }
 }
 

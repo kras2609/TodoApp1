@@ -15,6 +15,8 @@ namespace TodoApp1
 {
     public partial class Form1 : Form
     {
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -26,8 +28,11 @@ namespace TodoApp1
             var todo = new Todo()
             {
                 Body = todoBodyTextBox.Text,
-                Name = todoNameTextBox.Text
+                Name = todoNameTextBox.Text,
+                Id = Guid.NewGuid(),
+                Created = DateTime.Now
             };
+
             var result = service.Create(todo);
             
             if (result == true)
@@ -125,6 +130,30 @@ namespace TodoApp1
                 listBox1.Items.Add(item);
             }
 
+        }
+
+        private void redactButton_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count == 0)
+            {
+                MessageBox.Show("Нет элементов", "Ошибка!");
+                return;
+            }
+
+            if (listBox1.SelectedIndex != -1)
+            {
+                var todo = (Todo)listBox1.SelectedItem;
+                var id = todo.Id;
+                Form2 form2 = new Form2(id);
+                form2.listbox2 = listBox1;
+                form2.showtextBox2 = showtextBox;
+                form2.Show();
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент", "Ошибка!");
+                return;
+            }
         }
     }
 }
