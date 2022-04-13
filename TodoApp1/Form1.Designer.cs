@@ -39,6 +39,9 @@ namespace TodoApp1
             this.showButton = new System.Windows.Forms.Button();
             this.showtextBox = new System.Windows.Forms.TextBox();
             this.redactButton = new System.Windows.Forms.Button();
+            this.sortToNewButton = new System.Windows.Forms.Button();
+            this.sortToOldButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -135,11 +138,43 @@ namespace TodoApp1
             this.redactButton.UseVisualStyleBackColor = true;
             this.redactButton.Click += new System.EventHandler(this.redactButton_Click);
             // 
+            // sortToNewButton
+            // 
+            this.sortToNewButton.Location = new System.Drawing.Point(387, 3);
+            this.sortToNewButton.Name = "sortToNewButton";
+            this.sortToNewButton.Size = new System.Drawing.Size(121, 23);
+            this.sortToNewButton.TabIndex = 10;
+            this.sortToNewButton.Text = "От новых к старым";
+            this.sortToNewButton.UseVisualStyleBackColor = true;
+            this.sortToNewButton.Click += new System.EventHandler(this.sortToNewButton_Click);
+            // 
+            // sortToOldButton
+            // 
+            this.sortToOldButton.Location = new System.Drawing.Point(387, 29);
+            this.sortToOldButton.Name = "sortToOldButton";
+            this.sortToOldButton.Size = new System.Drawing.Size(121, 23);
+            this.sortToOldButton.TabIndex = 11;
+            this.sortToOldButton.Text = "От старых к новым";
+            this.sortToOldButton.UseVisualStyleBackColor = true;
+            this.sortToOldButton.Click += new System.EventHandler(this.sortToOldButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(300, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 15);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Сортировать:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 363);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.sortToOldButton);
+            this.Controls.Add(this.sortToNewButton);
             this.Controls.Add(this.redactButton);
             this.Controls.Add(this.showtextBox);
             this.Controls.Add(this.showButton);
@@ -170,6 +205,9 @@ namespace TodoApp1
         private System.Windows.Forms.Button showButton;
         private System.Windows.Forms.TextBox showtextBox;
         private System.Windows.Forms.Button redactButton;
+        private System.Windows.Forms.Button sortToNewButton;
+        private System.Windows.Forms.Button sortToOldButton;
+        private System.Windows.Forms.Label label3;
     }
 }
 

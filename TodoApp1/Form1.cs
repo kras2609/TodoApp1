@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -130,6 +131,20 @@ namespace TodoApp1
                 listBox1.Items.Add(item);
             }
 
+            var items = new List<Todo>();
+            foreach (var t in listBox1.Items)
+            {
+                var p = (Todo)t;
+                items.Add(p);
+
+            }
+            listBox1.Items.Clear();
+            var sorttonew = items.OrderByDescending(x => x.Created);
+
+            foreach (var a in sorttonew)
+            {
+                listBox1.Items.Add(a);
+            }
         }
 
         private void redactButton_Click(object sender, EventArgs e)
@@ -153,6 +168,42 @@ namespace TodoApp1
             {
                 MessageBox.Show("Выберите элемент", "Ошибка!");
                 return;
+            }
+        }
+
+        private void sortToNewButton_Click(object sender, EventArgs e)
+        {
+            var items = new List<Todo>();
+            foreach (var t in listBox1.Items)
+            {
+                var p = (Todo)t;
+                items.Add(p);
+
+            }
+            listBox1.Items.Clear();
+            var sorttonew = items.OrderByDescending(x => x.Created);
+
+            foreach (var a in sorttonew)
+            {
+                listBox1.Items.Add(a);
+            }
+        }
+
+        private void sortToOldButton_Click(object sender, EventArgs e)
+        {
+            var items = new List<Todo>();
+            foreach (var t in listBox1.Items)
+            {
+                var p = (Todo)t;
+                items.Add(p);
+
+            }
+            listBox1.Items.Clear();
+            var sorttoold = items.OrderBy(x => x.Created);
+
+            foreach (var a in sorttoold)
+            {
+                listBox1.Items.Add(a);
             }
         }
     }
