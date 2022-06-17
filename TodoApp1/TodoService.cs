@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TodoApp1.DTO;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace TodoApp1
 {
@@ -40,6 +42,18 @@ namespace TodoApp1
                     streamWriter.Close();
                 }
 
+                var sqlConnectionString = "Server=Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                using (var db = new SqlConnection(sqlConnectionString))
+                {
+                    db.QueryFirstOrDefault<Todo>(@"
+                        INSERT INTO [dbo].[Table] (Name, Body)
+                        VALUES (@Name, @Body)",
+                        new
+                        {
+                            Name = item.Name,
+                            Body = item.Body,
+                        });
+                }
                 return true;
             }
             catch (Exception ex)
