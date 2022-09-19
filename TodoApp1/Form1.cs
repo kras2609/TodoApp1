@@ -23,7 +23,7 @@ namespace TodoApp1
         {
             InitializeComponent();
         }
-        public string conString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoDB;Integrated Security=True";
+        
         private void createButton_Click(object sender, EventArgs e)
         {
             var service = new TodoService();
@@ -37,29 +37,29 @@ namespace TodoApp1
 
             var result = service.Create(todo);
             
-            if (result == true)
-            {
-                SqlConnection con = new SqlConnection(conString);
-                con.Open();
-                if (con.State == System.Data.ConnectionState.Open)
-                {
-                    string q = "insert into [Table](Id,Name,Body,Created)values('" + todo.Id + "','" + todo.Name + "','" + todo.Body + "','" + todo.Created + "')";
-                    SqlCommand cmd = new SqlCommand(q, con);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Соединение прошло успешно!");
-                }
-                listBox1.Items.Add(todo);
-                MessageBox.Show("Заметка создана", "Успешно!");
-                todoNameTextBox.Clear();
-                todoBodyTextBox.Clear();
+            //if (result == true)
+            //{
+            //    SqlConnection con = new SqlConnection(conString);
+            //    con.Open();
+            //    if (con.State == System.Data.ConnectionState.Open)
+            //    {
+            //        string q = "insert into [Table] (Id,Name,Body,Created) values ('" + todo.Id + "','" + todo.Name + "','" + todo.Body + "','" + todo.Created + "')";
+            //        SqlCommand cmd = new SqlCommand(q, con);
+            //        cmd.ExecuteNonQuery();
+            //        MessageBox.Show("Соединение прошло успешно!");
+            //    }
+            //    listBox1.Items.Add(todo);
+            //    MessageBox.Show("Заметка создана", "Успешно!");
+            //    todoNameTextBox.Clear();
+            //    todoBodyTextBox.Clear();
                 
-            }
-            else
-            {
-                MessageBox.Show("Не удалось создать заметку", "Ошибка!");
-                todoNameTextBox.Clear();
-                todoBodyTextBox.Clear();
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Не удалось создать заметку", "Ошибка!");
+            //    todoNameTextBox.Clear();
+            //    todoBodyTextBox.Clear();
+            //}
             
         }
 

@@ -72,7 +72,7 @@ namespace TodoApp1
             // 
             // saveButton
             // 
-            this.saveButton.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.saveButton.Location = new System.Drawing.Point(24, 289);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(252, 49);
@@ -85,7 +85,7 @@ namespace TodoApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 376);
+            this.ClientSize = new System.Drawing.Size(306, 376);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.bodyTextBox2);
             this.Controls.Add(this.nameTextBox2);

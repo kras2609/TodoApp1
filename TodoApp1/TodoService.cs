@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TodoApp1.DTO;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace TodoApp1
 {
@@ -20,7 +21,7 @@ namespace TodoApp1
     }
     public sealed class TodoService : ITodoService
     {
-        
+        public static string conString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoDB;Integrated Security=True";
         public bool Create(Todo item)
         {
             if (item.Name.Length >= 50)
@@ -35,13 +36,25 @@ namespace TodoApp1
                     File.Create(path).Dispose();
                 }
 
-                using (var streamWriter = new StreamWriter(path))
-                {
-                    var json = JsonConvert.SerializeObject(item, Formatting.Indented);
 
-                    streamWriter.WriteLine(json);
-                    streamWriter.Close();
+                using var streamWriter = new StreamWriter(path);
+                var json = JsonConvert.SerializeObject(item, Formatting.Indented);
+                streamWriter.WriteLine(json);
+
+                try
+                {
+                    using var connection = new SqlConnection(conString);
+                    connection.Open();
+
+                    var query = "INSERT INTO [Table] (Id,Name,Body,Created) values (@Id,@Name,@Body,@Created)";
+                    connection.Execute(query, new { Id = item.Id, Name = item.Name, Body = item.Body, Created = item.Created });
                 }
+                catch (Exception ex) 
+                {
+                    return false;
+                }
+               
+
 
                 //SqlConnection con = new SqlConnection(conString);
                 //con.Open();
@@ -50,7 +63,7 @@ namespace TodoApp1
                 //    string q = "insert into Table(Name,Body)values('" + item.Name + "','" + item.Body + "')";
                 //    SqlCommand cmd = new SqlCommand(q, con);
                 //    cmd.ExecuteNonQuery();
-                    
+
                 //}
 
                 //using (var db = new SqlConnection(conString))
@@ -113,6 +126,7 @@ namespace TodoApp1
                 todos.Add(todo);
             }
             return todos;
+            return new List<Todo>();
             
         }
     }
