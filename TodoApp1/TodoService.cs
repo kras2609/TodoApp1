@@ -20,6 +20,7 @@ namespace TodoApp1
     }
     public sealed class TodoService : ITodoService
     {
+        
         public bool Create(Todo item)
         {
             if (item.Name.Length >= 50)
@@ -42,18 +43,28 @@ namespace TodoApp1
                     streamWriter.Close();
                 }
 
-                var sqlConnectionString = "Server=Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                using (var db = new SqlConnection(sqlConnectionString))
-                {
-                    db.QueryFirstOrDefault<Todo>(@"
-                        INSERT INTO [dbo].[Table] (Name, Body)
-                        VALUES (@Name, @Body)",
-                        new
-                        {
-                            Name = item.Name,
-                            Body = item.Body,
-                        });
-                }
+                //SqlConnection con = new SqlConnection(conString);
+                //con.Open();
+                //if (con.State == System.Data.ConnectionState.Open)
+                //{
+                //    string q = "insert into Table(Name,Body)values('" + item.Name + "','" + item.Body + "')";
+                //    SqlCommand cmd = new SqlCommand(q, con);
+                //    cmd.ExecuteNonQuery();
+                    
+                //}
+
+                //using (var db = new SqlConnection(conString))
+                //{
+                //    db.Open();
+                //    db.QueryFirstOrDefault<Todo>(@"
+                //        INSERT INTO Table (Name, Body)
+                //        VALUES (@Name, @Body)",
+                //        new
+                //        {
+                //            Name = item.Name,
+                //            Body = item.Body,
+                //        });
+                //}
                 return true;
             }
             catch (Exception ex)
