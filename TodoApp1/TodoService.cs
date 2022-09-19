@@ -9,6 +9,7 @@ using TodoApp1.DTO;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using TodoApp1.Enums;
 
 namespace TodoApp1
 {
@@ -17,6 +18,7 @@ namespace TodoApp1
         bool Create(Todo item);
         Todo Get(Guid guid);
         ResponseBase Delete(Guid guid);
+        List<Todo> GetAll(OrderByType orderType);
         List<Todo> GetAll();
     }
     public sealed class TodoService : ITodoService
@@ -117,17 +119,36 @@ namespace TodoApp1
 
         public List<Todo> GetAll()
         {
-            var todos = new List<Todo>();
-            var txtFiles = Directory.GetFiles(Helper.GetTodoFolderPath(), "*.txt").ToList();
-            foreach (var currentFile in txtFiles)
+            try
             {
-                var json = File.ReadAllText(currentFile);
-                var todo = JsonConvert.DeserializeObject<Todo>(json);
-                todos.Add(todo);
+                using var connection = new SqlConnection(conString);
+                connection.Open();
+
+                var query = "SELECT * FROM Todos";
+                return connection.Query<Todo>(query).ToList();
             }
-            return todos;
-            return new List<Todo>();
-            
+            catch(Exception ex)
+            {
+                return new List<Todo>();
+            }
+        }
+        public List<Todo> GetAll(OrderByType type)
+        {
+            try
+            {
+                using var connection = new SqlConnection(conString);
+                connection.Open();
+                var query = "";
+                if(type == OrderByType.MinToMax)
+                    query = "SELECT * FROM Todos order by Created";
+                else
+                    query = "SELECT * FROM Todos order by Created desc";
+                return connection.Query<Todo>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Todo>();
+            }
         }
     }
 }
