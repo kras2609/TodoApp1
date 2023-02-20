@@ -1,7 +1,7 @@
 ﻿
 namespace TodoApp1
 {
-    partial class Form1
+    partial class TodoApp
     {
         /// <summary>
         ///  Required designer variable.
@@ -42,6 +42,7 @@ namespace TodoApp1
             this.sortToNewButton = new System.Windows.Forms.Button();
             this.sortToOldButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -90,12 +91,14 @@ namespace TodoApp1
             // 
             // listBox1
             // 
+            this.listBox1.DisplayMember = "Name";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(300, 58);
+            this.listBox1.Location = new System.Drawing.Point(299, 58);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(228, 199);
             this.listBox1.TabIndex = 5;
+            this.listBox1.ValueMember = "Id";
             // 
             // deleteButton
             // 
@@ -167,11 +170,24 @@ namespace TodoApp1
             this.label3.TabIndex = 12;
             this.label3.Text = "Сортировать:";
             // 
-            // Form1
+            // closeButton
+            // 
+            this.closeButton.BackColor = System.Drawing.Color.Coral;
+            this.closeButton.Font = new System.Drawing.Font("Showcard Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.closeButton.Location = new System.Drawing.Point(723, 3);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(143, 33);
+            this.closeButton.TabIndex = 13;
+            this.closeButton.Text = "Выход";
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // TodoApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 363);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.sortToOldButton);
             this.Controls.Add(this.sortToNewButton);
@@ -185,8 +201,8 @@ namespace TodoApp1
             this.Controls.Add(this.todoNameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "TodoApp";
+            this.Text = "TodoApp";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -208,6 +224,7 @@ namespace TodoApp1
         private System.Windows.Forms.Button sortToNewButton;
         private System.Windows.Forms.Button sortToOldButton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button closeButton;
     }
 }
 

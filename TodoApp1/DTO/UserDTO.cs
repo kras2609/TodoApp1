@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TodoApp1.DTO
 {
-    public sealed class ResponseBase
+    public sealed class UserDTO
     {
+        public User User { get; set; }
         public Status Status { get; set; }
-        public Exception Exception { get; set; }
     }
 }

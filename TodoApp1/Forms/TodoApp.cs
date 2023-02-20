@@ -12,47 +12,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TodoApp1.DTO;
+using Dapper;
+using TodoApp1.Models;
 
 namespace TodoApp1
 {
-    public partial class Form1 : Form
+    public partial class TodoApp : Form
     {
         
 
-        public Form1()
+        public TodoApp()
         {
             InitializeComponent();
         }
         
-        private void createButton_Click(object sender, EventArgs e)
+        private async void createButton_Click(object sender, EventArgs e)
         {
             var service = new TodoService();
             var todo = new Todo()
             {
                 Body = todoBodyTextBox.Text,
                 Name = todoNameTextBox.Text,
-                Id = Guid.NewGuid(),
                 Created = DateTime.Now
             };
 
-            var result = service.Create(todo);
-
+            var result = await service.CreateAsync(todo);
             if (result == true)
             {
-                //SqlConnection con = new SqlConnection(conString);
-                //con.Open();
-                //if (con.State == System.Data.ConnectionState.Open)
-                //{
-                //    string q = "insert into [Table] (Id,Name,Body,Created) values ('" + todo.Id + "','" + todo.Name + "','" + todo.Body + "','" + todo.Created + "')";
-                //    SqlCommand cmd = new SqlCommand(q, con);
-                //    cmd.ExecuteNonQuery();
-                //    MessageBox.Show("Соединение прошло успешно!");
-                //}
                 listBox1.Items.Add(todo);
                 MessageBox.Show("Заметка создана", "Успешно!");
                 todoNameTextBox.Clear();
                 todoBodyTextBox.Clear();
-
             }
             else
             {
@@ -60,12 +50,13 @@ namespace TodoApp1
                 todoNameTextBox.Clear();
                 todoBodyTextBox.Clear();
             }
-
+            //listBox1.DisplayMember = "Name";
+            //listBox1.ValueMember = "Id";
         }
 
        
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private async void deleteButton_Click(object sender, EventArgs e)
         {
             if (listBox1.Items.Count == 0)
             {
@@ -88,34 +79,29 @@ namespace TodoApp1
             }
 
             var service = new TodoService();
-            var response = service.Delete(todo.Id);
-
+            var response = await service.DeleteAsync(todo.Id);
             if(response.Status == Status.Error)
             {
                 MessageBox.Show($"Ошибка : {response.Exception.Message}");
                 return;
-            }
-
-            
-
+            }            
         }
 
 
 
-        private void showButton_Click(object sender, EventArgs e)
+        private async void showButton_Click(object sender, EventArgs e)
         {
             if (listBox1.Items.Count == 0)
             {
                 MessageBox.Show("Нет элементов", "Ошибка!");
                 return;
             }
-
             
             if (listBox1.SelectedIndex != -1)
             {
                 var todo = (Todo)listBox1.SelectedItem;
                 var service = new TodoService();
-                var get = service.Get(todo.Id);
+                var get = await service.GetAsync(todo.Id);
                 string showText = Convert.ToString(get.Body);
                 showtextBox.Text = showText;
             }
@@ -123,18 +109,13 @@ namespace TodoApp1
             {
                 MessageBox.Show("Выберите элемент", "Ошибка!");
                 return;
-            }
-            
+            }            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            listBox1.DisplayMember = "Name";
-            listBox1.ValueMember = "Id";
-
+        private async void Form1_Load(object sender, EventArgs e)
+        {            
             var service = new TodoService();
-            var todoList = service.GetAll();
-            
+            var todoList = await service.GetAllAsync();            
             foreach (var item in todoList)
             {
                 listBox1.Items.Add(item);
@@ -145,7 +126,6 @@ namespace TodoApp1
             {
                 var p = (Todo)t;
                 items.Add(p);
-
             }
             listBox1.Items.Clear();
             var sorttonew = items.OrderByDescending(x => x.Created);
@@ -168,7 +148,7 @@ namespace TodoApp1
             {
                 var todo = (Todo)listBox1.SelectedItem;
                 var id = todo.Id;
-                Form2 form2 = new Form2(id);
+                RedactWindow form2 = new RedactWindow(id);
                 form2.listbox2 = listBox1;
                 form2.showtextBox2 = showtextBox;
                 form2.Show();
@@ -180,40 +160,34 @@ namespace TodoApp1
             }
         }
 
-        private void sortToNewButton_Click(object sender, EventArgs e)
+        private async void sortToNewButton_Click(object sender, EventArgs e)
         {
-            var items = new List<Todo>();
-            foreach (var t in listBox1.Items)
-            {
-                var p = (Todo)t;
-                items.Add(p);
-
-            }
             listBox1.Items.Clear();
-            var sorttonew = items.OrderByDescending(x => x.Created);
-
-            foreach (var a in sorttonew)
+            var service = new TodoService();
+            var todoList = await service.GetAllAsync(Enums.OrderByType.MaxToMin);
+            foreach (var item in todoList)
             {
-                listBox1.Items.Add(a);
+                listBox1.Items.Add(item);
             }
         }
 
-        private void sortToOldButton_Click(object sender, EventArgs e)
+        private async void sortToOldButton_Click(object sender, EventArgs e)
         {
-            var items = new List<Todo>();
-            foreach (var t in listBox1.Items)
-            {
-                var p = (Todo)t;
-                items.Add(p);
-
-            }
             listBox1.Items.Clear();
-            var sorttoold = items.OrderBy(x => x.Created);
-
-            foreach (var a in sorttoold)
+            var service = new TodoService();
+            var todoList = await service.GetAllAsync(Enums.OrderByType.MinToMax);
+            foreach (var item in todoList)
             {
-                listBox1.Items.Add(a);
+                listBox1.Items.Add(item);
             }
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            loginWindow lgnWindow = new loginWindow();
+            lgnWindow.Closed += (s, args) => Close();
+            lgnWindow.Show();
         }
     }
 }

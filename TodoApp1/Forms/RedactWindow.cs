@@ -7,52 +7,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using Dapper;
+using TodoApp1.Models;
 
 namespace TodoApp1
 {
-    public partial class Form2 : Form
+    public partial class RedactWindow : Form
     {
         
-        public Form2()
+        public RedactWindow()
         {
             InitializeComponent();
 
         }
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         
         public ListBox listbox2;
         public TextBox showtextBox2;
-        public Form2(Guid id)
+        public RedactWindow(int id)
         {
             InitializeComponent();
             Id = id;
-            
-
         }
       
-        private void saveButton_Click(object sender, EventArgs e)
+        private async void saveButton_Click(object sender, EventArgs e)
         {
             
             var service = new TodoService();
             listbox2.Items.RemoveAt(listbox2.SelectedIndex);
-            var response = service.Delete(Id);
+            var response = await service.DeleteAsync(Id);
             var todo = new Todo()
             {
-                Id = Guid.NewGuid(),
                 Name = nameTextBox2.Text,
                 Body = bodyTextBox2.Text,
                 Created = DateTime.Now
             };
-            var result = service.Create(todo);
+           
+            using var connection = new SqlConnection(TodoService.conString);
+            connection.Open();
+            var query = "DELETE FROM [Todos] WHERE Id = @Id";
+            connection.Execute(query, new { Id = Id });
+            
+            var result = await service.CreateAsync(todo);
             listbox2.Items.Add(todo);
             showtextBox2.Clear();
             Close();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private async void Form2_Load(object sender, EventArgs e)
         {
             var service = new TodoService();
-            var get = service.Get(Id);
+            var get = await service.GetAsync(Id);
             string showText = Convert.ToString(get.Name);
             nameTextBox2.Text = showText;
             string showText2 = Convert.ToString(get.Body);

@@ -1,7 +1,7 @@
 ﻿
 namespace TodoApp1
 {
-    partial class Form2
+    partial class RedactWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -81,7 +81,7 @@ namespace TodoApp1
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // Form2
+            // RedactWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,8 +91,8 @@ namespace TodoApp1
             this.Controls.Add(this.nameTextBox2);
             this.Controls.Add(this.bodyLabel2);
             this.Controls.Add(this.nameLabel2);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "RedactWindow";
+            this.Text = "RedactWindow";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
